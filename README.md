@@ -26,17 +26,17 @@ jobs:
         uses: actions/checkout@master
 
       - name: Check wp version
-        uses: tarosky/farmhand-wp-aciton@v1
+        uses: tarosky/farmhand-wp-action@v1
         id: wp_version
         with:
           readme: readm.txt # Path to your readme. Default "README.md".
 
       - name: Update Issue if needed
-        if: steps.wp_version.outputs.should_update
+        if: ${{ 'true' == steps.wp_version.outputs.should_update }}
         uses: actions-ecosystem/action-create-issue@v1
         with:
           github_token: ${{ secrets.github_token }}
-          title: ${{ steps.wp_version.outputs.version }}
+          title: Check compatibility with WordPress ${{ steps.wp_version.outputs.version }}
           body: |
             ## TODO
 
